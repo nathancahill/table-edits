@@ -1,0 +1,19 @@
+{
+  "name": "table-edits",
+  "version": "0.0.1",
+  "authors": [
+    "Nathan Cahill <nathan@nathancahill.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nathancahill/table-edits",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
