@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Table Edits</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="bower_components/skeleton/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+
+  <style>
+    .button.button-small {
+        height: 30px;
+        line-height: 30px;
+        padding: 0px 10px;
+    }
+
+    th:last-child {
+      text-align: right;
+    }
+
+    td:last-child {
+        text-align: right;
+    }
+
+    td:last-child .button {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 0px;
+        margin-bottom: 0px;
+        margin-right: 5px;
+        background-color: #FFF;
+    }
+
+    td:last-child .button .fa {
+        line-height: 30px;
+        width: 30px;
+    }
+  </style>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="twelve columns" style="margin-top: 25%">
+        <table class="u-full-width demo">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Sex</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-id="1">
+              <td>Dave Gamache</td>
+              <td>26</td>
+              <td>Male</td>
+              <td>
+                <a class="button button-small view" title="View">
+                  <i class="fa fa-eye"></i>
+                </a>
+                <a class="button button-small edit" title="Edit">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a class="button button-small remove" title="Remove">
+                  <i class="fa fa-remove"></i>
+                </a>
+              </td>
+            </tr>
+            <tr data-id="1">
+              <td>Dwayne Johnson</td>
+              <td>42</td>
+              <td>Male</td>
+              <td>
+                <a class="button button-small view" title="View">
+                  <i class="fa fa-eye"></i>
+                </a>
+                <a class="button button-small edit" title="Edit">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a class="button button-small remove" title="Remove">
+                  <i class="fa fa-remove"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="table-edits.js"></script>
+  <script>
+  $('table tr').editable();
+  </script>
+</body>
+</html>

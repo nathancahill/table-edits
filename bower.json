@@ -15,5 +15,9 @@
   ],
   "dependencies": {
     "jquery": "~2.1.4"
+  },
+  "devDependencies": {
+    "font-awesome": "~4.3.0",
+    "skeleton": "~2.0.4"
   }
 }
