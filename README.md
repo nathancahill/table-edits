@@ -10,10 +10,11 @@ __Table Edits__ only does a couple things:
 
 And __optionally__, a couple more:
 
-
 - Binds a button or double click to start editing
 - Binds enter and escape keys to save and cancel
 - Maintains column widths when switching to edit
+
+#### Options
 
 ```
 $("table tr").editable({
@@ -28,7 +29,24 @@ $("table tr").editable({
 });
 ```
 
-The only additional markup __Table Edits__ requires is a `data-field` attribute on each editable cell with it's column name.
+#### Markup
+
+The only additional markup __Table Edits__ requires is a `data-field` attribute on each editable cell with it's column name:
+
+```
+<table>
+    <tr>
+        <td data-field="name">Dave Gamache</td>
+        <td data-field="age">26</td>
+        <td data-field="sex">Male</td>
+        <td>
+            <a class="edit>Edit</a>
+        </td>
+    </tr>
+<table>
+```
+
+The last cell will not become editable because it does not have the `data-field` attribute.
 
 #### Saving Table Data
 
