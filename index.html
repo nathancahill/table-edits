@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Table Edits</title>
+  <title>Table Edits jQuery Plugin</title>
   <meta name="description" content="">
   <meta name="author" content="">
-
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="bower_components/skeleton/css/normalize.css">
   <link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css">
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
 
   <style>
+    body {
+      margin-bottom: 100px;
+    }
+
+    .row {
+      margin-bottom: 20px;
+    }
+
+    pre {
+      margin-top: 0;
+    }
+
     .button.button-small {
         height: 30px;
         line-height: 30px;
         padding: 0px 10px;
+    }
+
+    td input[type=text] {
+      width: 100%;
+      height: 30px;
+      margin: 0;
+      padding: 2px 10px;
     }
 
     th:last-child {
@@ -53,58 +61,45 @@
         width: 30px;
     }
   </style>
-
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
-
 </head>
 <body>
+  <a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
-      <div class="twelve columns" style="margin-top: 25%">
+      <div class="twelve columns" style="margin-top: 5%">
+        <h4>$.Table Edits</h4>
+        <p>
+          Table Edits is a light (1.7k) jQuery plugin for making table rows editable.
+          Built as minimally as possible so it's easy to extend.
+        </p>
         <table class="u-full-width demo">
           <thead>
             <tr>
               <th>Name</th>
               <th>Age</th>
               <th>Sex</th>
-              <th>Actions</th>
+              <th>Edit</th>
             </tr>
           </thead>
           <tbody>
             <tr data-id="1">
-              <td>Dave Gamache</td>
-              <td>26</td>
-              <td>Male</td>
+              <td data-field="name">Dave Gamache</td>
+              <td data-field="age">26</td>
+              <td data-field="sex">Male</td>
               <td>
-                <a class="button button-small view" title="View">
-                  <i class="fa fa-eye"></i>
-                </a>
                 <a class="button button-small edit" title="Edit">
                   <i class="fa fa-pencil"></i>
-                </a>
-                <a class="button button-small remove" title="Remove">
-                  <i class="fa fa-remove"></i>
                 </a>
               </td>
             </tr>
-            <tr data-id="1">
-              <td>Dwayne Johnson</td>
-              <td>42</td>
-              <td>Male</td>
+            <tr data-id="2">
+              <td data-field="name">Dwayne Johnson</td>
+              <td data-field="age">42</td>
+              <td data-field="sex">Male</td>
               <td>
-                <a class="button button-small view" title="View">
-                  <i class="fa fa-eye"></i>
-                </a>
                 <a class="button button-small edit" title="Edit">
                   <i class="fa fa-pencil"></i>
-                </a>
-                <a class="button button-small remove" title="Remove">
-                  <i class="fa fa-remove"></i>
                 </a>
               </td>
             </tr>
@@ -112,14 +107,89 @@
         </table>
       </div>
     </div>
+    <div class="row">
+      <div class="six columns">
+        <p>
+          <strong>Table Edits</strong> only does a couple things:
+          <ul>
+            <li>Replaces cell values with input fields on edit</li>
+            <li>Handles row editing state</li>
+            <li>Fires callbacks for edit, save and cancel</li>
+          </ul>
+          And <strong>optionally</strong>, a couple more:
+          <br /><br />
+          <ul>
+            <li>Binds a button or double click to start editing</li>
+            <li>Binds enter and escape keys to save and cancel</li>
+            <li>Maintains column widths when switching to edit</li>
+          </ul>
+        </p>
+      </div>
+      <div class="six columns">
+<pre><code>$("table tr").editable({
+    keyboard: true,
+    dblclick: true,
+    button: true,
+    buttonSelector: ".edit",
+    maintainWidth: true,
+    edit: function(values) {},
+    save: function(values) {},
+    cancel: function(values) {}
+});</code></pre>
+      </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns">
+        <p>
+          The only additional markup <strong>Table Edits</strong> requires
+          is a <code>data-field</code> attribute on each editable cell with it's column name.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="six columns">
+        <h5>Saving Table Data</h5>
+        <p>
+          Table Edits makes it easy to save edits. Callbacks are passed a <code>values</code>
+          object with column names and values of the edited row.
+          <br /><br />
+          Posting the new data to an API endpoint is simple.
+        </p>
+      </div>
+      <div class="six columns">
+<pre><code>$("table tr").editable({
+    save: function(values) {
+      var id = $(this).data('id');
+      $.post('/api/object/' + id, values);
+    }
+});</code></pre>
+      </div>
+    </div>
   </div>
 
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="table-edits.js"></script>
+  <script src="build/table-edits.min.js"></script>
   <script>
-  $('table tr').editable();
+    $('table tr').editable({
+      edit: function(values) {
+        $(".edit i", this)
+          .removeClass('fa-pencil')
+          .addClass('fa-save')
+          .attr('title', 'Save');
+      },
+      save: function(values) {
+        $(".edit i", this)
+          .removeClass('fa-save')
+          .addClass('fa-pencil')
+          .attr('title', 'Edit');
+      },
+      cancel: function(values) {
+        $(".edit i", this)
+          .removeClass('fa-save')
+          .addClass('fa-pencil')
+          .attr('title', 'Edit');
+      }
+    });
   </script>
 </body>
 </html>
