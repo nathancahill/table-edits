@@ -1,6 +1,6 @@
 ## $.Table Edits
 
-Table Edits is a light (1.7k) jQuery plugin for making table rows editable. Built as minimally as possible so it's easy to extend.
+Table Edits is a light (1.7k) jQuery plugin for making table rows editable. Built as minimally as possible so it's easy to extend. [Demo](http://nathancahill.github.io/table-edits/)
 
 __Table Edits__ only does a couple things:
 
