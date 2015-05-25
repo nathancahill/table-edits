@@ -1,6 +1,6 @@
 {
   "name": "table-edits",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "authors": [
     "Nathan Cahill <nathan@nathancahill.com>"
   ],
@@ -18,6 +18,8 @@
   },
   "devDependencies": {
     "font-awesome": "~4.3.0",
-    "skeleton": "~2.0.4"
+    "skeleton": "~2.0.4",
+    "pikaday-skeleton": "~2.0.4",
+    "momentjs": "~2.10.3"
   }
 }
