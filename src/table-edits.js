@@ -7,6 +7,7 @@
             button: true,
             buttonSelector: ".edit",
             maintainWidth: true,
+            dropdowns: {},
             edit: function() {},
             save: function() {},
             cancel: function() {}
@@ -28,6 +29,7 @@
 
             if (this.options.dblclick) {
                 $(this.element)
+                    .css('cursor', 'pointer')
                     .bind('dblclick', this.toggle.bind(this));
             }
 
@@ -55,10 +57,11 @@
 
             $('td[data-field]', this.element).each(function() {
                 var input,
+                    field = $(this).data('field'),
                     value = $(this).text(),
                     width = $(this).width();
 
-                values[$(this).data('field')] = value;
+                values[field] = value;
 
                 $(this).empty();
 
@@ -66,11 +69,26 @@
                     $(this).width(width);
                 }
 
-                input = $('<input type="text" />')
-                    .val(value)
-                    .data('old-value', value)
-                    .dblclick(instance._captureEvent)
-                    .appendTo(this);
+                if (field in instance.options.dropdowns) {
+                    input = $('<select></select>');
+
+                    for (var i = 0; i < instance.options.dropdowns[field].length; i++) {
+                        $('<option></option>')
+                             .text(instance.options.dropdowns[field][i])
+                             .appendTo(input);
+                    };
+
+                    input.val(value)
+                         .data('old-value', value)
+                         .dblclick(instance._captureEvent);
+                } else {
+                    input = $('<input type="text" />')
+                        .val(value)
+                        .data('old-value', value)
+                        .dblclick(instance._captureEvent);
+                }
+
+                input.appendTo(this);
 
                 if (instance.options.keyboard) {
                     input.keyup(instance._captureKey.bind(instance));
@@ -85,13 +103,12 @@
                 values = {};
 
             $('td[data-field]', this.element).each(function() {
-                var value = $('input', this).val();
+                var value = $(':input', this).val();
 
                 values[$(this).data('field')] = value;
 
-                $(this)
-                    .empty()
-                    .text(value);
+                $(this).empty()
+                       .text(value);
             });
 
             this.options.save.bind(this.element)(values);
@@ -102,13 +119,12 @@
                 values = {};
 
             $('td[data-field]', this.element).each(function() {
-                var value = $('input', this).data('old-value');
+                var value = $(':input', this).data('old-value');
 
                 values[$(this).data('field')] = value;
 
-                $(this)
-                    .empty()
-                    .text(value);
+                $(this).empty()
+                       .text(value);
             });
 
             this.options.cancel.bind(this.element)(values);
