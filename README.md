@@ -13,6 +13,7 @@ And __optionally__, a couple more:
 - Binds a button or double click to start editing
 - Binds enter and escape keys to save and cancel
 - Maintains column widths when switching to edit
+- Create select fields instead of input fields
 
 #### Options
 
@@ -22,6 +23,7 @@ $("table tr").editable({
     dblclick: true,
     button: true,
     buttonSelector: ".edit",
+    dropdowns: {},
     maintainWidth: true,
     edit: function(values) {},
     save: function(values) {},
