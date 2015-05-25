@@ -10,6 +10,8 @@
 
   <link rel="stylesheet" href="bower_components/skeleton/css/normalize.css">
   <link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css">
+  <link rel="stylesheet" href="bower_components/pikaday/css/pikaday.css">
+  <link rel="stylesheet" href="bower_components/pikaday-skeleton/css/pikaday-skeleton.css">
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
 
   <style>
@@ -31,11 +33,11 @@
         padding: 0px 10px;
     }
 
-    td input[type=text] {
+    td input[type=text], td select {
       width: 100%;
       height: 30px;
       margin: 0;
-      padding: 2px 10px;
+      padding: 2px 8px;
     }
 
     th:last-child {
@@ -77,6 +79,7 @@
           <thead>
             <tr>
               <th>Name</th>
+              <th>Birthday</th>
               <th>Age</th>
               <th>Sex</th>
               <th>Edit</th>
@@ -85,6 +88,7 @@
           <tbody>
             <tr data-id="1">
               <td data-field="name">Dave Gamache</td>
+              <td data-field="birthday">May 19, 2015</td>
               <td data-field="age">26</td>
               <td data-field="sex">Male</td>
               <td>
@@ -95,6 +99,7 @@
             </tr>
             <tr data-id="2">
               <td data-field="name">Dwayne Johnson</td>
+              <td data-field="birthday">May 19, 2015</td>
               <td data-field="age">42</td>
               <td data-field="sex">Male</td>
               <td>
@@ -122,6 +127,7 @@
             <li>Binds a button or double click to start editing</li>
             <li>Binds enter and escape keys to save and cancel</li>
             <li>Maintains column widths when switching to edit</li>
+            <li>Create select fields instead of input fields</li>
           </ul>
         </p>
       </div>
@@ -131,6 +137,7 @@
     dblclick: true,
     button: true,
     buttonSelector: ".edit",
+    dropdowns: {},
     maintainWidth: true,
     edit: function(values) {},
     save: function(values) {},
@@ -168,27 +175,51 @@
   </div>
 
   <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="build/table-edits.min.js"></script>
+  <script src="bower_components/momentjs/moment.js"></script>
+  <script src="bower_components/pikaday/pikaday.js"></script>
+  <script src="src/table-edits.js"></script>
   <script>
-    $('table tr').editable({
-      edit: function(values) {
-        $(".edit i", this)
-          .removeClass('fa-pencil')
-          .addClass('fa-save')
-          .attr('title', 'Save');
-      },
-      save: function(values) {
-        $(".edit i", this)
-          .removeClass('fa-save')
-          .addClass('fa-pencil')
-          .attr('title', 'Edit');
-      },
-      cancel: function(values) {
-        $(".edit i", this)
-          .removeClass('fa-save')
-          .addClass('fa-pencil')
-          .attr('title', 'Edit');
-      }
+    $(function() {
+      var pickers = {};
+
+      $('table tr').editable({
+        dropdowns: {
+          sex: ['Male', 'Female']
+        },
+        edit: function(values) {
+          $(".edit i", this)
+            .removeClass('fa-pencil')
+            .addClass('fa-save')
+            .attr('title', 'Save');
+
+          pickers[this] = new Pikaday({
+            field: $("td[data-field=birthday] input", this)[0],
+            format: 'MMM D, YYYY'
+          });
+        },
+        save: function(values) {
+          $(".edit i", this)
+            .removeClass('fa-save')
+            .addClass('fa-pencil')
+            .attr('title', 'Edit');
+
+          if (this in pickers) {
+            pickers[this].destroy();
+            delete pickers[this];
+          }
+        },
+        cancel: function(values) {
+          $(".edit i", this)
+            .removeClass('fa-save')
+            .addClass('fa-pencil')
+            .attr('title', 'Edit');
+
+          if (this in pickers) {
+            pickers[this].destroy();
+            delete pickers[this];
+          }
+        }
+      });
     });
   </script>
 </body>
