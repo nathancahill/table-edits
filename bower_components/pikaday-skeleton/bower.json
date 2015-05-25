@@ -1,0 +1,26 @@
+{
+  "name": "pikaday-skeleton",
+  "version": "2.0.4",
+  "homepage": "http://nathancahill.github.io/pikaday-skeleton/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nathancahill/pikaday-skeleton/"
+  },
+  "authors": [
+    "Nathan Cahill <nathan@nathancahill.com> (http://nathancahill.com/)"
+  ],
+  "description": "The refreshing JavaScript Datepicker, styled for Skeleton",
+  "main": "css/pikaday-skeleton.css",
+  "dependencies": {
+    "skeleton": "2.0.4",
+    "pikaday": "1.3.2"
+  },
+  "keywords": [
+    "datepicker",
+    "calendar",
+    "css",
+    "skeleton",
+    "boilerplate"
+  ],
+  "license": "MIT"
+}

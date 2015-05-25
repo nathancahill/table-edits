@@ -1,0 +1,37 @@
+/*
+* Created for:
+* Skeleton V2.0.4
+* Pikaday V1.3.2
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+*/
+
+/* Override Skeleton styles */
+
+.pika-table {
+  margin-bottom: 0;
+  line-height: inherit;
+}
+
+.pika-table th, .pika-table td {
+  border-bottom: 0;
+}
+
+.pika-button {
+  border-radius: 0;
+  height: auto;
+  font-weight: normal;
+}
+
+.pika-prev, .pika-next {
+  margin-bottom: 0;
+}
+
+.pika-title select {
+  height: auto;
+  padding: 0;
+}
+
+.pika-title select option {
+  font-weight: normal;
+}
