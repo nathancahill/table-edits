@@ -1,6 +1,6 @@
 {
   "name": "table-edits",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "devDependencies": {
     "bower": "^1.3.12",
     "grunt": "~0.4.5",
