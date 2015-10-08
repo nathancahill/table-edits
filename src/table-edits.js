@@ -91,7 +91,7 @@
                 input.appendTo(this);
 
                 if (instance.options.keyboard) {
-                    input.keyup(instance._captureKey.bind(instance));
+                    input.keydown(instance._captureKey.bind(instance));
                 }
             });
 
