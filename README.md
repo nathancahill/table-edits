@@ -1,6 +1,8 @@
 ## $.Table Edits
 
-Table Edits is a light (1.7k) jQuery plugin for making table rows editable. Built as minimally as possible so it's easy to extend. [Demo](http://nathancahill.github.io/table-edits/)
+[![File Size](https://badge-size.herokuapp.com/nathancahill/table-edits/master/build/table-edits.min.js.svg?compression=gzip&label=size)](https://raw.githubusercontent.com/nathancahill/table-edits/master/build/table-edits.min.js)
+
+Table Edits is a lightweight jQuery plugin for making table rows editable. Built as minimally as possible so it's easy to extend. [Demo](http://nathancahill.github.io/table-edits/)
 
 __Table Edits__ only does a couple things:
 
