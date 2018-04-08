@@ -1,5 +1,5 @@
 
-;(function ($, window, document, undefined) {
+; (function ($, window, document, undefined) {
     var pluginName = "editable",
         defaults = {
             keyboard: true,
@@ -8,14 +8,15 @@
             buttonSelector: ".edit",
             maintainWidth: true,
             dropdowns: {},
-            edit: function() {},
-            save: function() {},
-            cancel: function() {}
+            dropdownValues: {},
+            edit: function () { },
+            save: function () { },
+            cancel: function () { }
         };
 
     function editable(element, options) {
         this.element = element;
-        this.options = $.extend({}, defaults, options) ;
+        this.options = $.extend({}, defaults, options);
 
         this._defaults = defaults;
         this._name = pluginName;
@@ -24,7 +25,7 @@
     }
 
     editable.prototype = {
-        init: function() {
+        init: function () {
             this.editing = false;
 
             if (this.options.dblclick) {
@@ -39,7 +40,7 @@
             }
         },
 
-        toggle: function(e) {
+        toggle: function (e) {
             e.preventDefault();
 
             this.editing = !this.editing;
@@ -51,11 +52,11 @@
             }
         },
 
-        edit: function() {
+        edit: function () {
             var instance = this,
                 values = {};
 
-            $('td[data-field]', this.element).each(function() {
+            $('td[data-field]', this.element).each(function () {
                 var input,
                     field = $(this).data('field'),
                     value = $(this).text(),
@@ -73,14 +74,14 @@
                     input = $('<select></select>');
 
                     for (var i = 0; i < instance.options.dropdowns[field].length; i++) {
-                        $('<option></option>')
-                             .text(instance.options.dropdowns[field][i])
-                             .appendTo(input);
+                        $('<option value="' + instance.options.dropdownValues[field][i] + '"></option>')
+                            .text(instance.options.dropdowns[field][i])
+                            .appendTo(input);
                     };
 
                     input.val(value)
-                         .data('old-value', value)
-                         .dblclick(instance._captureEvent);
+                        .data('old-value', value)
+                        .dblclick(instance._captureEvent);
                 } else {
                     input = $('<input type="text" />')
                         .val(value)
@@ -98,43 +99,43 @@
             this.options.edit.bind(this.element)(values);
         },
 
-        save: function() {
+        save: function () {
             var instance = this,
                 values = {};
 
-            $('td[data-field]', this.element).each(function() {
+            $('td[data-field]', this.element).each(function () {
                 var value = $(':input', this).val();
 
                 values[$(this).data('field')] = value;
 
                 $(this).empty()
-                       .text(value);
+                    .text(value);
             });
 
             this.options.save.bind(this.element)(values);
         },
 
-        cancel: function() {
+        cancel: function () {
             var instance = this,
                 values = {};
 
-            $('td[data-field]', this.element).each(function() {
+            $('td[data-field]', this.element).each(function () {
                 var value = $(':input', this).data('old-value');
 
                 values[$(this).data('field')] = value;
 
                 $(this).empty()
-                       .text(value);
+                    .text(value);
             });
 
             this.options.cancel.bind(this.element)(values);
         },
 
-        _captureEvent: function(e) {
+        _captureEvent: function (e) {
             e.stopPropagation();
         },
 
-        _captureKey: function(e) {
+        _captureKey: function (e) {
             if (e.which === 13) {
                 this.editing = false;
                 this.save();
@@ -145,11 +146,11 @@
         }
     };
 
-    $.fn[pluginName] = function(options) {
+    $.fn[pluginName] = function (options) {
         return this.each(function () {
             if (!$.data(this, "plugin_" + pluginName)) {
                 $.data(this, "plugin_" + pluginName,
-                new editable(this, options));
+                    new editable(this, options));
             }
         });
     };
